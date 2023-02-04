@@ -6,4 +6,4 @@ The resulting NanoEgde AI Library will be the best fit for the use case selected
 
 The library, *libneai.a, NanoEdgeAI.h, knowledge.h* are placed in the path **acc_lib** of ***ASS-SpeedFan-NanoEdgeLibClassification*** to classify input signals with the trained knowledge.
 
-The class of speed of fan that can be detected is: **OFF , Speed1, Speed2**
+The class of speed of fan that can be detected is: **OFF, Speed1, Speed2**
