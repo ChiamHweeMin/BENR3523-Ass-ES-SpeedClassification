@@ -5,3 +5,5 @@ automatically find the best bundle of signal processing, machine learning model,
 The resulting NanoEgde AI Library will be the best fit for the use case selected, and it will be untrained.
 
 The library, *libneai.a, NanoEdgeAI.h, knowledge.h* are placed in the path **acc_lib** of ***ASS-SpeedFan-NanoEdgeLibClassification*** to classify input signals with the trained knowledge.
+
+The class of speed of fan that cab be detected is: ***OFF , Speed1, Speed2 ***
