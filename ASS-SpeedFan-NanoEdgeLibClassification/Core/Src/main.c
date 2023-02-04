@@ -95,7 +95,8 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+	
+  /* classification using NanoEdge AI Library */
   /* Load the NanoEdge AI library with the trained knowledge. */
   enum neai_state error_code = neai_classification_init( knowledge );
   if (error_code != NEAI_OK) {
