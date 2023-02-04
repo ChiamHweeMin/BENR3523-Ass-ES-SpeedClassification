@@ -150,13 +150,13 @@ int main(void)
 		buf[0] = LIS3DH_OUT_X_L | 0x80;
 		ret = HAL_I2C_Master_Transmit(&hi2c1, LIS3DH_V_CHIP_ADDR, buf, 1, HAL_MAX_DELAY);
 		if (ret != HAL_OK) {
-			i--;	//New data not ready, skip this data
+			i--;	//New data not ready, re-sense the data
 		}
 		else {
 			buf[0] = LIS3DH_OUT_X_L | 0x80 | 0x40;
 			ret = HAL_I2C_Master_Receive(&hi2c1, LIS3DH_V_CHIP_ADDR, buf, 6, HAL_MAX_DELAY);
 			if (ret != HAL_OK) {
-				i--;	//New data not ready, skip this data
+				i--;	//New data not ready, re-sense the data
 			} else {
 				acc_buffer[NB_AXES * i] = ((buf[1] << 8) | buf[0]);
 				acc_buffer[(NB_AXES * i) + 1] = ((buf[3] << 8) | buf[2]);
