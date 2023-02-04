@@ -104,6 +104,7 @@ int main(void)
 
   buf[0] = LIS3DH_CTRL_REG1;
   buf[1] = 0x97;
+  /* ODR:1.34kHz, X, Y and Z Axis Enable */
   ret = HAL_I2C_Master_Transmit(&hi2c1, LIS3DH_V_CHIP_ADDR, buf, 2, HAL_MAX_DELAY);
 
   if (ret != HAL_OK) {
@@ -113,6 +114,7 @@ int main(void)
 
   buf[0] = LIS3DH_CTRL_REG4;
   buf[1] = 0x08;
+  /* High resolution Enable */
   ret = HAL_I2C_Master_Transmit(&hi2c1, LIS3DH_V_CHIP_ADDR, buf, 2, HAL_MAX_DELAY);
   if (ret != HAL_OK) {
 	  sprintf((char*)buf, "ErrorTx CTRL_REG4\r\n");
