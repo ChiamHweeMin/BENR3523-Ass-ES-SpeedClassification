@@ -147,7 +147,7 @@ int main(void)
 			 }
 		 }
 	 }
-	 //print every line of data infinite
+	 /* print every line of data infinite */
 	 for (uint16_t isample = 0; isample < (NB_AXES * BUFFER_SIZE - 1); isample++) {
 		 sprintf((char*)buf,"%f ", acc_buffer[isample]);
 		 HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
