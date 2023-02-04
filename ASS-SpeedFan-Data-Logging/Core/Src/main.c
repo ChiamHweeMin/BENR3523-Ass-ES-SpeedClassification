@@ -128,6 +128,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  /* buiding accelerometer buffers using raw accelerometer data */
 	  for (uint16_t i = 0; i < BUFFER_SIZE; i++) {
 		 buf[0] = LIS3DH_OUT_X_L | 0x80;
 		 ret = HAL_I2C_Master_Transmit(&hi2c1, LIS3DH_V_CHIP_ADDR, buf, 1, HAL_MAX_DELAY);
