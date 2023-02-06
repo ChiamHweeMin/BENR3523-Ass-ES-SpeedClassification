@@ -52,7 +52,7 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 HAL_StatusTypeDef ret;
-uint8_t buf[32];
+uint8_t buf[32];        // 8 bit unsigned byte with size of array buffer is 32
 float acc_buffer[BUFFER_SIZE * NB_AXES] = {0};
 /* USER CODE END PV */
 
@@ -105,11 +105,11 @@ int main(void)
   buf[0] = LIS3DH_CTRL_REG1;
   buf[1] = 0x97;
   /* ODR:1.34kHz, X, Y and Z Axis Enable */
-  ret = HAL_I2C_Master_Transmit(&hi2c1, LIS3DH_V_CHIP_ADDR, buf, 2, HAL_MAX_DELAY);
+  ret = HAL_I2C_Master_Transmit(&hi2c1, LIS3DH_V_CHIP_ADDR, buf, 2, HAL_MAX_DELAY); 
 
   if (ret != HAL_OK) {
-	  sprintf((char*)buf, "ErrorTx CTRL_REG1\r\n");
-	  HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
+	  sprintf((char*)buf, "ErrorTx CTRL_REG1\r\n"); // formats and stores a series of characters and values in the array buffer which returns ErrorTx CTRL_REG1
+	  HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY); // Sends an amount of data in non blocking mode
   }
 
   buf[0] = LIS3DH_CTRL_REG4;
@@ -117,8 +117,8 @@ int main(void)
   /* High resolution Enable */
   ret = HAL_I2C_Master_Transmit(&hi2c1, LIS3DH_V_CHIP_ADDR, buf, 2, HAL_MAX_DELAY);
   if (ret != HAL_OK) {
-	  sprintf((char*)buf, "ErrorTx CTRL_REG4\r\n");
-	  HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
+	  sprintf((char*)buf, "ErrorTx CTRL_REG4\r\n");  // formats and stores a series of characters and values in the array buffer which returns ErrorTx CTRL_REG1
+	  HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);  // Sends an amount of data in non blocking mode
   }
 
   /* USER CODE END 2 */
@@ -131,6 +131,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	  /* building accelerometer buffers using raw accelerometer data */
+	  /* we fill the accelerometer buffer */
 	  for (uint16_t i = 0; i < BUFFER_SIZE; i++) {
 		 buf[0] = LIS3DH_OUT_X_L | 0x80;
 		 ret = HAL_I2C_Master_Transmit(&hi2c1, LIS3DH_V_CHIP_ADDR, buf, 1, HAL_MAX_DELAY);
@@ -152,10 +153,10 @@ int main(void)
 	 /* print every line of data infinite */
 	 for (uint16_t isample = 0; isample < (NB_AXES * BUFFER_SIZE - 1); isample++) {
 		 sprintf((char*)buf,"%f ", acc_buffer[isample]);
-		 HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
+		 HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY); // Sends an amount of data in blocking mode
 	 }
 	 sprintf((char*)buf, "%f\r\n", acc_buffer[NB_AXES * BUFFER_SIZE - 1]);
-	 HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
+	 HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY); // Sends an amount of data in blocking mode
   }
   /* USER CODE END 3 */
 }
