@@ -54,7 +54,7 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 HAL_StatusTypeDef ret;
-uint8_t buf[32];
+uint8_t buf[32]; // 8 bit unsigned byte with size of array buffer is 32
 float acc_buffer[BUFFER_SIZE * NB_AXES] = {0};
 float output_class_buffer[CLASS_NUMBER]; // Buffer of class probabilities
 const char *id2class[CLASS_NUMBER + 1] = { // Buffer for mapping class id to class name
@@ -122,8 +122,8 @@ int main(void)
   /*  ODR:1.34kHz, X, Y and Z Axis Enable */
   ret = HAL_I2C_Master_Transmit(&hi2c1, LIS3DH_V_CHIP_ADDR, buf, 2, HAL_MAX_DELAY);
   if ( ret != HAL_OK) {
-	  sprintf((char*)buf, "ErrorTx CTRL_REG1\r\n");
-	  HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
+	  sprintf((char*)buf, "ErrorTx CTRL_REG1\r\n");  // formats and stores a series of characters and values in the array buffer which returns ErrorTx CTRL_REG1
+	  HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY); // Sends an amount of data in non blocking mode
   }
 
   buf[0] = LIS3DH_CTRL_REG4;
@@ -131,8 +131,8 @@ int main(void)
   /* High resolution Enable */
   ret = HAL_I2C_Master_Transmit(&hi2c1, LIS3DH_V_CHIP_ADDR, buf, 2, HAL_MAX_DELAY);
   if ( ret != HAL_OK) {
-	  sprintf((char*)buf, "ErrorTx CTRL_REG4\r\n");
-	  HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
+	  sprintf((char*)buf, "ErrorTx CTRL_REG4\r\n");  // formats and stores a series of characters and values in the array buffer which returns ErrorTx CTRL_REG1
+	  HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY); // Sends an amount of data in non blocking mode
   }
   /* USER CODE END 2 */
 
@@ -170,7 +170,7 @@ int main(void)
 
 	 /* print the result to the serial */
 	 sprintf((char *)buf, "\nSpeed Detected: %s.\n\n", id2class[newClass]);
-	 HAL_UART_Transmit(&huart2, buf, strlen((char const*)buf), HAL_MAX_DELAY);
+	 HAL_UART_Transmit(&huart2, buf, strlen((char const*)buf), HAL_MAX_DELAY); // Sends an amount of data in non blocking mode
   }
 
   /* USER CODE END 3 */
