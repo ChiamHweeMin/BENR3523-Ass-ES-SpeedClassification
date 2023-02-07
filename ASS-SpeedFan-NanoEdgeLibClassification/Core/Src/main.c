@@ -55,7 +55,7 @@ UART_HandleTypeDef huart2;
 /* USER CODE BEGIN PV */
 HAL_StatusTypeDef ret;
 uint8_t buf[32]; // 8 bit unsigned byte with size of array buffer is 32
-float acc_buffer[BUFFER_SIZE * NB_AXES] = {0};
+float acc_buffer[BUFFER_SIZE * NB_AXES] = {0}; // Length of the data is BUFFER_SIZE * NB_AXES
 float output_class_buffer[CLASS_NUMBER]; // Buffer of class probabilities
 const char *id2class[CLASS_NUMBER + 1] = { // Buffer for mapping class id to class name
 	"unknown",
